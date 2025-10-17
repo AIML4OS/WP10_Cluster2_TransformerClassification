@@ -4,9 +4,7 @@
 
 library(data.table)
 library(keras)
-#library(tokenizers)
 library(tensorflow)
-#library(dplyr)
 library(progress)
 
 source("R/helpers.R")
@@ -197,33 +195,7 @@ params$OneHot$x2_info <- x2[[2]]
 x <- x[[1]] #sparse matrices with IDF for tokens in the text - 0/. else
 x2 <- x2[[1]]
 
-# split inputs and outputs into train-test-valid
-target.train <- dat[index.train,][["ISCO_target"]]
-target.valid <- dat[index.valid,][["ISCO_target"]]
-
-x.factors_train <- x.factors[index.train,]
-x.factors_valid <- x.factors[index.valid,]
-
-x_1_train <- x_1[index.train,]
-x_1_valid <- x_1[index.valid,]
-
-x_2_train <- x_2[index.train,]
-x_2_valid <- x_2[index.valid,]
-
-
-# x_onehot_train <- as.matrix(cbind(x[index.train,],x2[index.train,])) # convert during batch runs
-# x_onehot_test <- as.matrix(cbind(x[index.test,],x2[index.test,]))
-# x_onehot_valid <- as.matrix(cbind(x[index.valid,],x2[index.valid,]))
 gc()
-
-
-# normalise weights so categories are equally represented
-# dat[index.train,weights:=1/.N*10,by=c("ISCO_target")]
-# dat[index.test,weights:=1/.N*10,by=c("ISCO_target")]
-# dat[index.valid,weights:=1/.N*10,by=c("ISCO_target")]
-
-weights.train <- dat[index.train,]$count
-weights.valid <- dat[index.valid,]$count
 
 # weights by occurence of ISCO Codes
 case_weights <- dat[index.train,sum(count),by=c("ISCO_target")]
@@ -395,7 +367,6 @@ for(m in 1:max_epochs){
     model %>% train_on_batch(
       x.train,
       sample_weight = weights.batch,
-      class_weight = class_weight_batch,
       dat[batch,][["ISCO_target"]]
     )
 
