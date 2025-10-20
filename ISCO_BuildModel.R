@@ -82,7 +82,8 @@ params$date <- Sys.Date()
 # load data
 source("R/load_data.R")
 
-# set additional variables as either factor, character (categories) or integer vars
+# set additional variables as either factor, character (categories) or integer vars 
+# if none, set factor_vars <- NULL
 factor_vars <- c("edu","citizen")
 
 dat[,c(FLAGS$Target):=factor(get(FLAGS$Target))]
@@ -113,28 +114,34 @@ params$MaxLength <- 90
 
 
 # factors to integer values
-factor_newnames <- paste0(factor_vars, "_INT")
-dat[,c(factor_newnames):=lapply(.SD, factor), .SDcols=c(factor_vars)]
+if(!is.null(factor_vars)){
+  factor_newnames <- paste0(factor_vars, "_INT")
+  dat[,c(factor_newnames):=lapply(.SD, factor), .SDcols=c(factor_vars)]
+}
+
 
 
 
 # ------------------------------------------------------------------------------------------------------
 # Setup INPUTS
 # setup input for FACTORS
-x.factors.help <- dat[,.SD,.SDcols=c(factor_vars)]
-x.factors.help <- lapply(x.factors.help, factor)
-params$help_factor_lookup <- lapply(x.factors.help,levels) #save to decode later
-x.factors.help <- lapply(x.factors.help,as.numeric)
+if(!is.null(factor_vars)){
+  x.factors.help <- dat[,.SD,.SDcols=c(factor_vars)]
+  x.factors.help <- lapply(x.factors.help, factor)
+  params$help_factor_lookup <- lapply(x.factors.help,levels) #save to decode later
+  x.factors.help <- lapply(x.factors.help,as.numeric)
+  
+  uniqueFactor <- lapply(x.factors.help,uniqueN)
+  params$uniqueFactor <- uniqueFactor
+  
+  # one hot encoding of factor variables
+  x.factors <- list()
+  for(i in 1:length(uniqueFactor)){
+    x.factors[[i]] <-  to_categorical(x.factors.help[[i]]-1,num_classes = uniqueFactor[[i]])
+  }
+  x.factors <- do.call(cbind,x.factors)
 
-uniqueFactor <- lapply(x.factors.help,uniqueN)
-params$uniqueFactor <- uniqueFactor
-
-# one hot encoding of factor variables
-x.factors <- list()
-for(i in 1:length(uniqueFactor)){
-  x.factors[[i]] <-  to_categorical(x.factors.help[[i]]-1,num_classes = uniqueFactor[[i]])
 }
-x.factors <- do.call(cbind,x.factors)
 
 # tokenized texts with first nGram (here 3-gram)
 x_emb_1 <- setupEmbedding2(dat,ngram=FLAGS$nGram1,string_col = "Text_clean", roll = roll, keep_spaces = keep_spaces)
@@ -214,9 +221,12 @@ saveRDS(params,file=file.path(localPath,"parameter.RDS"))
 # define neural network architecture  ---------------------------------------------------
 
 # Factor variable input (edu and citizenship)
-input_length <- ncol(x.factors)
-input_factors <- layer_input(shape=input_length, name="FACTORS")
-model_factors <- input_factors
+if(!is.null(factor_vars)){
+  input_length <- ncol(x.factors)
+  input_factors <- layer_input(shape=input_length, name="FACTORS")
+  model_factors <- input_factors
+}
+
 
 # one hot token ID input
 input_length <- ncol(x) + ncol(x2)
@@ -262,8 +272,12 @@ model_tr5 <- build_model(
 
 
 # concatenate all above defined layers
-model_list <- list(model_factors,  model_tr, model_tr5) 
-inputsAll <- c(input_factors, input_tr,input_tr5)
+model_list <- list(model_tr, model_tr5) 
+inputsAll <- c(input_tr,input_tr5)
+if(!is.null(factor_vars)){
+  model_list <- c(list(model_factors),model_list)
+  inputsAll <- c(input_factors,inputsAll)
+}
 if(oneHot){
   model_list <- c(list(model_onehot),model_list)
   inputsAll <- c(input_onehot, inputsAll)
@@ -352,11 +366,17 @@ for(m in 1:max_epochs){
     batch <- all_samples[1:min(length(all_samples),batch_size)]
     all_samples <- all_samples[-c(1:length(batch))]
 
-    x.train <- list(OneHot = as.matrix(cbind(x[batch,],x2[batch,])),
-                    FACTORS = x.factors[batch,],
-                    Transformer_3Gram=x_1[batch,],
+    x.train <- list(Transformer_3Gram=x_1[batch,],
                     Transformer_5Gram=x_2[batch,]
     )
+    if(!is.null(factor_vars)){
+      x.train <- c(list(FACTORS = x.factors[batch,]),
+                   x.train)
+    }
+    if(oneHot){
+      x.train <- c(list(OneHot = as.matrix(cbind(x[batch,],x2[batch,]))),
+                   x.train)
+    }
 
 
     weights.batch <- NULL
@@ -383,11 +403,17 @@ for(m in 1:max_epochs){
     batch <- all_samples[1:min(length(all_samples),batch_size)]
     all_samples <- all_samples[-c(1:length(batch))]
 
-    x.valid <- list(OneHot = as.matrix(cbind(x[batch,],x2[batch,])),
-                    FACTORS = x.factors[batch,],
-                    Transformer_3Gram=x_1[batch,],
+    x.valid <- list(Transformer_3Gram=x_1[batch,],
                     Transformer_5Gram=x_2[batch,]
     )
+    if(!is.null(factor_vars)){
+      x.valid <- c(list(FACTORS = x.factors[batch,]),
+                   x.valid)
+    }
+    if(oneHot){
+      x.valid <- c(list(OneHot = as.matrix(cbind(x[batch,],x2[batch,]))),
+                   x.valid)
+    }
 
     eval_model <- evaluate(model,
                            x.valid, dat[batch,][["ISCO_target"]],
@@ -406,7 +432,7 @@ for(m in 1:max_epochs){
   if(eval_model[[topk]]>current_best){
     current_best <- eval_model[[topk]]
     current_best_m <- m
-    keras::save_model_hdf5(model, filepath = file.path(localPath,"model.hdf5"))
+    keras::save_model_hdf5(model, filepath = file.path(localPath,"model.keras"))
   }
   if(m-current_best_m>(patience-1)){
     break
@@ -422,12 +448,19 @@ for(step in 1:num_steps){
   
   batch <- all_samples[1:min(length(all_samples),batch_size)]
   all_samples <- all_samples[-c(1:length(batch))]
+
   
-  x.test <- list(OneHot = as.matrix(cbind(x[batch,],x2[batch,])),
-                  FACTORS = x.factors[batch,],
-                  Transformer_3Gram=x_1[batch,],
+  x.test <- list(Transformer_3Gram=x_1[batch,],
                   Transformer_5Gram=x_2[batch,]
   )
+  if(!is.null(factor_vars)){
+    x.test <- c(list(FACTORS = x.factors[batch,]),
+                 x.test)
+  }
+  if(oneHot){
+    x.test <- c(list(OneHot = as.matrix(cbind(x[batch,],x2[batch,]))),
+                 x.test)
+  }
   
   eval_model_test <- evaluate(model,
                          x.test, dat[batch,][["ISCO_target"]],
