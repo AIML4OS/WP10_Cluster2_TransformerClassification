@@ -7,7 +7,7 @@ project:
 
 website:
   page-navigation: true
-  title: "Introduction to `ggplot2`"
+  title: "AIML4OS WP10 - Cluster 2"
   # In the two URLs below:
   # - replace AIML4OS by the Github account/organization your repository is hosted by;
   # - replace AIML4OS-template-quarto-r by the name of your repository.
