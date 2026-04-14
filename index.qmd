@@ -1,17 +1,17 @@
 ---
-title: "Template for WP6 training material" # See below for multilingual resource
+title: "AIML4OS Cluser 4" # See below for multilingual resource
+subtitle: "Textclassification with Transformer Models - Austria's Use-Case"
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%">
 author:
-  - name: Public Statistician 1
-    url: https://github.com/publicstatistician1
-    email: Public.Statistician1@statistics.org
-  - name: Public Statistician 2
-    url: https://github.com/publicstatistician2
-    email: Public.Statistician2@statistics.org
-date: "2025-05-16"
-doi: "10.1000/182"  # Optional
-license: "CC-BY 4.0"  # Optional
+  - name: Nina Niederhametner
+    url: https://github.com/ninanhm
+    email: nina.niederhametner@statistik.gv.at
+  - name: Johannes Gussenbauer
+    url: https://github.com/JahnnesGuss
+    email: johannes.gussenbauer@statistik.gv.at
+date: "2026-04-16"
+
 
 # If resources is multilingual, adopt that structure
 # (need to have both title and title-* fields)
@@ -20,7 +20,7 @@ license: "CC-BY 4.0"  # Optional
 # title-fr: "Bonjour SSPCloud"
 
 description: |
-    This template is a fast starting pack for AIML4OS projects that use `R`. For `Python` projects, see [this `Github` repository](https://github.com/InseeFrLab/AIML4OS-template-quarto-python).
+    This material is designed to report Austria's Use-Case for text classification of standardized international codes using transformer models. In addition to a textual report, we also provide a runnable example on [onyxia](https://datalab.sspcloud.fr/launcher/ide/rstudio?name=Dev_Transformer_Classification&version=2.4.5&s3=region-79669f20&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FWP10_Cluster2_TransformerClassification%2Frefs%2Fheads%2Fr_template%2FAIML4OS-template-quarto-r-main%2Finit.sh%C2%BB&git.repository=%C2%ABhttps%3A%2F%2Fgithub.com%2FAIML4OS%2FWP10_Cluster2_TransformerClassification%C2%BB&git.branch=%C2%ABr_template%C2%BB&autoLaunch=true).
 
 # If resources is multilingual, adopt that structure
 # (need to have both description and description-* fields)
@@ -34,8 +34,8 @@ description: |
   #   Les résumés des ressources sont intégrés sous forme de métadonnées, utiles pour les portails de formation ou le partage sur les réseaux sociaux.
 
 tags:
-  - Starter Pack
-  - SSPCloud Documentation
+  - Textclassification
+  - AIML4OS
 
 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY-OenRMvFyZUfDm_snUCxpV4SyaHvUeqObA&s"
 
@@ -88,15 +88,6 @@ suggestedRequirements:
 # Optional: Statistical process classification
 gsbpm: "5.1" # See complete taxonomy: https://www.unescap.org/sites/default/d8files/event-documents/GSBPM_v5.1_R_for_SBP_8-18Apr2024.pdf
 ---
-
-
-# What is this template?
-
-This template is a Quarto Website customized for the AIML4OS project, designed to be used with {{< fa brands r-project >}}.
-
-# How to use it?
-
-See [this tutorial](https://aiml4os.github.io/training-material-starting-pack/).
 
 
 
