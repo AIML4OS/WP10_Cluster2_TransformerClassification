@@ -1,0 +1,7 @@
+"0","# weights by occurence of ISCO Codes"
+"0","case_weights <- dat[index.train,sum(count),by=c(""ISCO_target"")]"
+"0","max_count_case <- max(case_weights$V1)"
+"0","case_weights <- case_weights[,.(ISCO_target,max_count_case/V1)]"
+"0","case_weights_names <- case_weights$ISCO_target"
+"0","case_weights <- as.list(case_weights$V2)"
+"0","names(case_weights) <- as.character(case_weights_names)"
