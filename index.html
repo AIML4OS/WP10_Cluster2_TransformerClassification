@@ -6,12 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nina Niederhametner">
-<meta name="author" content="Johannes Gussenbauer">
-<meta name="dcterms.date" content="2026-04-16">
-<meta name="description" content="This material is designed to report Austria’s Use-Case for text classification of standardized international codes using transformer models. In addition to a textual report, we also provide a runnable example on onyxia.">
+<meta name="author" content="Public Statistician 1">
+<meta name="author" content="Public Statistician 2">
+<meta name="dcterms.date" content="2025-05-16">
+<meta name="description" content="This template is a fast starting pack for AIML4OS projects that use R. For Python projects, see this Github repository.">
 
-<title>AIML4OS Cluser 4 – AIML4OS WP10 - Cluster 2</title>
+<title>Template for WP6 training material – Introduction to ggplot2</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -48,6 +48,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-bfc81c90a4e668f7cc6782dca231ae32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -132,8 +134,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-this-template" id="toc-what-is-this-template" class="nav-link active" data-scroll-target="#what-is-this-template">What is this template?</a></li>
+  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it?</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -141,13 +150,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">AIML4OS Cluser 4</h1>
-<p class="subtitle lead">Textclassification with Transformer Models - Austria’s Use-Case</p>
+<h1 class="title">Template for WP6 training material</h1>
 </div>
 
 <div>
   <div class="description">
-    <p>This material is designed to report Austria’s Use-Case for text classification of standardized international codes using transformer models. In addition to a textual report, we also provide a runnable example on <a href="https://datalab.sspcloud.fr/launcher/ide/rstudio?name=Dev_Transformer_Classification&amp;version=2.4.5&amp;s3=region-79669f20&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FWP10_Cluster2_TransformerClassification%2Frefs%2Fheads%2Fr_template%2FAIML4OS-template-quarto-r-main%2Finit.sh%C2%BB&amp;git.repository=%C2%ABhttps%3A%2F%2Fgithub.com%2FAIML4OS%2FWP10_Cluster2_TransformerClassification%C2%BB&amp;git.branch=%C2%ABr_template%C2%BB&amp;autoLaunch=true">onyxia</a>.</p>
+    <p>This template is a fast starting pack for AIML4OS projects that use <code>R</code>. For <code>Python</code> projects, see <a href="https://github.com/InseeFrLab/AIML4OS-template-quarto-python">this <code>Github</code> repository</a>.</p>
   </div>
 </div>
 
@@ -157,19 +165,27 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p><a href="https://github.com/ninanhm">Nina Niederhametner</a> <a href="mailto:nina.niederhametner@statistik.gv.at" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-             <p><a href="https://github.com/JahnnesGuss">Johannes Gussenbauer</a> <a href="mailto:johannes.gussenbauer@statistik.gv.at" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+             <p><a href="https://github.com/publicstatistician1">Public Statistician 1</a> <a href="mailto:Public.Statistician1@statistics.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+             <p><a href="https://github.com/publicstatistician2">Public Statistician 2</a> <a href="mailto:Public.Statistician2@statistics.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 16, 2026</p>
+      <p class="date">May 16, 2025</p>
     </div>
   </div>
   
     
+    <div>
+    <div class="quarto-title-meta-heading">Doi</div>
+    <div class="quarto-title-meta-contents">
+      <p class="doi">
+        <a href="https://doi.org/10.1000/182">10.1000/182</a>
+      </p>
+    </div>
+  </div>
   </div>
   
 
@@ -177,10 +193,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="what-is-this-template" class="level1">
+<h1>What is this template?</h1>
+<p>This template is a Quarto Website customized for the AIML4OS project, designed to be used with <i class="fa-brands fa-r-project" aria-label="r-project"></i>.</p>
+</section>
+<section id="how-to-use-it" class="level1">
+<h1>How to use it?</h1>
+<p>See <a href="https://aiml4os.github.io/training-material-starting-pack/">this tutorial</a>.</p>
 
 
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -595,4 +619,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
