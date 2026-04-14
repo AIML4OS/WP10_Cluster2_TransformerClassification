@@ -18,4 +18,4 @@ The model consists of four input streams:
 
 4.  $N_2$-gram
 
-    ![Model Architecture](img/model_architekur.png)
+    ![Model Architecture](images/model_architekur.png)
