@@ -4,6 +4,8 @@ project:
   render: # Add HERE new chapters (but not the interactive qmd files)
     - index.qmd
     - chapters/chapter1.qmd
+    - chapters/chapter2.qmd
+    - chapters/chapter3.qmd
 
 website:
   page-navigation: true
@@ -22,9 +24,13 @@ website:
     search: true
     contents: # Add HERE new chapters (but not the interactive qmd files)
       - href: index.qmd
-        text: Introduction
+        text: Cluster 2
       - href: chapters/chapter1.qmd
+        text: Introduction
+      - href: chapters/chapter2.qmd
         text: Transformers
+      - href: chapters/chapter3.qmd
+        text: Results
 
 format:
   html:
