@@ -3,7 +3,7 @@
 #
 
 library(data.table)
-library(keras)
+library(keras3)
 library(tensorflow)
 library(progress)
 
@@ -327,7 +327,7 @@ model %>% compile(
 # once the model is trained, the test set is used to evaluate the models finals oos performance 
 
 # define some training hyperparameters
-callbacks <- list(keras::callback_early_stopping(monitor = "val_loss", 
+callbacks <- list(keras3::callback_early_stopping(monitor = "val_loss", 
                                                  min_delta = 0.01, 
                                                  patience = 10, 
                                                  verbose = 1, 

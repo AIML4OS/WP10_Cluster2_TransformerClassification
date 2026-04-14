@@ -3,7 +3,7 @@
 library(stringr)
 library(stringdist)
 library(stopwords)
-library(keras)
+library(keras3)
 library(tokenizers)
 library(stringi)
 
