@@ -161,72 +161,74 @@ ul.task-list li input[type="checkbox"] {
 <p>We found that combining transformer models with other machine learning models can further improve the model’s performance. For this, we train Naive Bayes or XGBoost models on the same training data, where we again use one-hot encoded token IDs as inputs. We then take the predictions of each model separately and calculate the mean of the predictions per class over the models. We then re-rank these mean predictions to obtain a new ranking and with that the combined top-k predictions. Combining transformer models with an XGBoost model works particularly well. Additionally, incorporating variables such as sex, age, and citizenship further enhances model accuracy. Further, we find that using a model with two n-gram inputs instead of one, followed by transformer layers can increase the model performance up to 10% in accuracy.</p>
 <p>Overall, the NACE classification model performs worst, with a top-5 accuracy of 72% and a top-10 accuracy of 78%. We believe that the reason for this is that firstly, NACE has the most codes (701 in total) and secondly, the lowest amount of training data (only about 13.000). Further, we believe that NACE classification performs poorly due to the inherent ambiguity in assigning inputs to a single class. Many inputs could plausibly fit into multiple classes, making it challenging to achieve accurate and definitive classifications.</p>
 <p>For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in <span class="citation" data-cites="tab-results">@tab-results</span>.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell" data-tbl-cap="results per code" data-tbl-align="center">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<caption>results per code</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Code</th>
-<th style="text-align: right;">% encoded automatically</th>
-<th style="text-align: right;">top-5 accuracy</th>
-<th style="text-align: right;">top-10 accuracy</th>
+<th style="text-align: center;">Code</th>
+<th style="text-align: center;">% encoded automatically</th>
+<th style="text-align: center;">top-5 accuracy</th>
+<th style="text-align: center;">top-10 accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">COICOP</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">90</td>
-<td style="text-align: right;">95</td>
+<td style="text-align: center;">COICOP</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">95</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ISCO</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">93</td>
-<td style="text-align: right;">96</td>
+<td style="text-align: center;">ISCO</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">93</td>
+<td style="text-align: center;">96</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ISCED</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">82</td>
-<td style="text-align: right;">87</td>
+<td style="text-align: center;">ISCED</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">82</td>
+<td style="text-align: center;">87</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">NACE</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">78</td>
+<td style="text-align: center;">NACE</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">78</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p>In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. <span class="citation" data-cites="tab-isco">@tab-isco</span> shows these results in detail.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell" data-tbl-cap="ISCO results per survey" data-tbl-align="center">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<caption>ISCO results per survey</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Survey</th>
-<th style="text-align: right;">top-5 accuracy</th>
-<th style="text-align: right;">top-10 accuracy</th>
+<th style="text-align: center;">Survey</th>
+<th style="text-align: center;">top-5 accuracy</th>
+<th style="text-align: center;">top-10 accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">LFS</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">82</td>
+<td style="text-align: center;">LFS</td>
+<td style="text-align: center;">76</td>
+<td style="text-align: center;">82</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">JVS</td>
-<td style="text-align: right;">81</td>
-<td style="text-align: right;">87</td>
+<td style="text-align: center;">JVS</td>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">87</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">SES</td>
-<td style="text-align: right;">95</td>
-<td style="text-align: right;">97</td>
+<td style="text-align: center;">SES</td>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">97</td>
 </tr>
 </tbody>
 </table>
