@@ -160,11 +160,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Our results show that, depending on the code, between 13% (NACE) and 38% (ISCO) of input strings can be automatically encoded (Phase 1), meaning that a class can be assigned to the input either though high probability of the string matching or the neural network. We selected a threshold of 0.91 for the automatic string matching, as this keeps the error rate below 3-4%, which aligns with the error rate for manual classification.</p>
 <p>We found that combining transformer models with other machine learning models can further improve the model’s performance. For this, we train Naive Bayes or XGBoost models on the same training data, where we again use one-hot encoded token IDs as inputs. We then take the predictions of each model separately and calculate the mean of the predictions per class over the models. We then re-rank these mean predictions to obtain a new ranking and with that the combined top-k predictions. Combining transformer models with an XGBoost model works particularly well. Additionally, incorporating variables such as sex, age, and citizenship further enhances model accuracy. Further, we find that using a model with two n-gram inputs instead of one, followed by transformer layers can increase the model performance up to 10% in accuracy.</p>
 <p>Overall, the NACE classification model performs worst, with a top-5 accuracy of 72% and a top-10 accuracy of 78%. We believe that the reason for this is that firstly, NACE has the most codes (701 in total) and secondly, the lowest amount of training data (only about 13.000). Further, we believe that NACE classification performs poorly due to the inherent ambiguity in assigning inputs to a single class. Many inputs could plausibly fit into multiple classes, making it challenging to achieve accurate and definitive classifications.</p>
-<p>For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in <span class="citation" data-cites="results">@results</span>.</p>
-<div class="cell" data-tbl-cap="Results per Code" data-tbl-align="center">
+<p>For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in <a href="#tbl-results" class="quarto-xref">Table&nbsp;1</a>.</p>
+<div class="cell" data-tbl-align="center">
+<div id="tbl-results" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Results per Code
+</figcaption>
+<div aria-describedby="tbl-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Results per Code</caption>
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: center;">Code</th>
@@ -202,11 +207,19 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-<p>In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. <span class="citation" data-cites="isco">@isco</span> shows these results in detail.</p>
-<div class="cell" data-tbl-cap="ISCO Results per Survey" data-tbl-align="center">
+</figure>
+</div>
+</div>
+<p>In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. <a href="#tbl-isco" class="quarto-xref">Table&nbsp;2</a> shows these results in detail.</p>
+<div class="cell" data-tbl-align="center">
+<div id="tbl-isco" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-isco-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: ISCO Results per Survey
+</figcaption>
+<div aria-describedby="tbl-isco-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>ISCO Results per Survey</caption>
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: center;">Survey</th>
@@ -232,6 +245,24 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>In <a href="#fig-iscores" class="quarto-xref">Figure&nbsp;1</a> shows the different models and their performance per survey. For all surveys we conclude that the combination of a transformer and an XGBoost model yields the best predictions. A simple Naive Bayes model continuously scores the lowest in top-10 accuracy.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-iscores" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/results_per_survey.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Comparison of Models
+</figcaption>
+</figure>
+</div>
 </div>
 </div>
 <p>As an attempt to further improve our models’ performances, we explored hierarchical models. The implementation of some of these models and the collection of their results was done during the course of Cluster 3 and can be found <a href="https://aiml4os.github.io/WP10_Cluster3_HierarchicalClassificationModels/">here</a>.</p>
