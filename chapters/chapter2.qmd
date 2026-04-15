@@ -1,6 +1,6 @@
 # Transformer Models
 ```{r setup}
-knitr::opts_chunk$set(message=FALSE)
+knitr::opts_chunk$set(message=FALSE,echo = F)
 ```
 
 Our model-based approach is divided into two main phases: Phase 1, string matching, and Phase 2, the neural network (NN)-based model. This approach is visualized in @fig-pipeline. As a first step in this pipeline, we perform pre-processing on the input strings. This includes transforming all characters to lowercase, removing stop words (e.g., “and,” “to,” “for”) and special characters (e.g., “-,” “%,” “&”), and converting any umlaut characters to non-umlauts (e.g., “ü” to “u”). Additionally, we remove gender-specific word endings, such as “-in” in German, to maintain consistency. 
