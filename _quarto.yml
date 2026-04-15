@@ -24,11 +24,11 @@ website:
     search: true
     contents: # Add HERE new chapters (but not the interactive qmd files)
       - href: index.qmd
-        text: Cluster 2
-      - href: chapters/chapter1.qmd
         text: Introduction
+      - href: chapters/chapter1.qmd
+        text: Use-Case
       - href: chapters/chapter2.qmd
-        text: Transformers
+        text: Model Approach
       - href: chapters/chapter3.qmd
         text: Results
 
@@ -39,6 +39,7 @@ format:
       - brand
     css: styles.css
     toc: true
+    embed-resources: true
 
 filters:
   - export-metadata.lua
