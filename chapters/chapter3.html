@@ -145,10 +145,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#results" id="toc-results" class="nav-link active" data-scroll-target="#results">Results</a>
-  <ul class="collapse">
-  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">todo</a></li>
-  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link active" data-scroll-target="#results">Results</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/edit/main/chapters/chapter3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/blob/main/chapters/chapter3.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -160,11 +157,84 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="results" class="level1">
 <h1>Results</h1>
-<section id="todo" class="level2">
-<h2 class="anchored" data-anchor-id="todo">todo</h2>
+<p>Our results show that, depending on the code, between 13% (NACE) and 38% (ISCO) of input strings can be automatically encoded (Phase 1), meaning that a class can be assigned to the input either though high probability of the string matching or the neural network. We selected a threshold of 0.91 for the automatic string matching, as this keeps the error rate below 3-4%, which aligns with the error rate for manual classification.</p>
+<p>We found that combining transformer models with other machine learning models can further improve the model’s performance. For this, we train Naive Bayes or XGBoost models on the same training data, where we again use one-hot encoded token IDs as inputs. We then take the predictions of each model separately and calculate the mean of the predictions per class over the models. We then re-rank these mean predictions to obtain a new ranking and with that the combined top-k predictions. Combining transformer models with an XGBoost model works particularly well. Additionally, incorporating variables such as sex, age, and citizenship further enhances model accuracy. Further, we find that using a model with two n-gram inputs instead of one, followed by transformer layers can increase the model performance up to 10% in accuracy.</p>
+<p>Overall, the NACE classification model performs worst, with a top-5 accuracy of 72% and a top-10 accuracy of 78%. We believe that the reason for this is that firstly, NACE has the most codes (701 in total) and secondly, the lowest amount of training data (only about 13.000). Further, we believe that NACE classification performs poorly due to the inherent ambiguity in assigning inputs to a single class. Many inputs could plausibly fit into multiple classes, making it challenging to achieve accurate and definitive classifications.</p>
+<p>For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in <span class="citation" data-cites="tab-results">@tab-results</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Code</th>
+<th style="text-align: right;">% encoded automatically</th>
+<th style="text-align: right;">top-5 accuracy</th>
+<th style="text-align: right;">top-10 accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">COICOP</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ISCO</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ISCED</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NACE</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">78</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. <span class="citation" data-cites="tab-isco">@tab-isco</span> shows these results in detail.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Survey</th>
+<th style="text-align: right;">top-5 accuracy</th>
+<th style="text-align: right;">top-10 accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LFS</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">82</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JVS</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SES</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">97</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As an attempt to further improve our models’ performances, we explored hierarchical models. The implementation of some of these models and the collection of their results was done during the course of Cluster 3 and can be found <a href="https://aiml4os.github.io/WP10_Cluster3_HierarchicalClassificationModels/">here</a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
