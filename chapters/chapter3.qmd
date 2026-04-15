@@ -7,10 +7,10 @@ Further, we find that using a model with two n-gram inputs instead of one, follo
 
 Overall, the NACE classification model performs worst, with a top-5 accuracy of 72% and a top-10 accuracy of 78%.  We believe that the reason for this is that firstly, NACE has the most codes (701 in total) and secondly, the lowest amount of training data (only about 13.000).  Further, we believe that NACE classification performs poorly due to the inherent ambiguity in assigning inputs to a single class. Many inputs could plausibly fit into multiple classes, making it challenging to achieve accurate and definitive classifications. 
 
-For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in @tab-results.
+For COICOP, ISCO, and ISCED, we achieve top-10 accuracies of 90%, 96%, and 87%, respectively. These metrics were evaluated on the test set, excluding inputs that were automatically encoded through string matching. The exact results are shown in @results.
 ```{r, include=T,echo=F,message=F}
-#| label: tab-results
-#| tbl-cap: "results per code"
+#| label: results
+#| tbl-cap: "Results per Code"
 #| tbl-align: center
 #| echo: false
 #| message: false
@@ -23,10 +23,10 @@ knitr::kable(res, align = "c")
 ```
 
 
-In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. @tab-isco shows these results in detail.
+In examining ISCO results by survey type, we observe notable differences in accuracy across surveys. The accuracy for labor force survey (LFS) data is approximately 5% and 19% lower than for the Job Vacancy Survey (JVS) and the Structure of Earnings Survey (SES), respectively. We attribute this gap to the varied input styles across surveys. While the Job Vacancy and Structure of Earnings Surveys are completed by professional personnel, the micro census relies on responses from members of the public, who may lack the specialized terminology needed to accurately describe their job titles. @isco shows these results in detail.
 ```{r, include=T,echo=F,message=F}
-#| label: tab-isco
-#| tbl-cap: "ISCO results per survey"
+#| label: isco
+#| tbl-cap: "ISCO Results per Survey"
 #| tbl-align: center
 #| echo: false
 #| message: false
