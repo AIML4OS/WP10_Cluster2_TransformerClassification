@@ -7,7 +7,7 @@ Our model-based approach is divided into two main phases: Phase 1, string matchi
 ```{r, out.width='90%', fig.align='center', fig.cap='Text classification pipeline',include=T,echo=F}
 #| label: fig-pipeline
 library(here)
-knitr::include_graphics(file.path(here("chapters","images/textclass_pipeline.png")))
+knitr::include_graphics(file.path(here("images","textclass_pipeline.png")))
 ```
 
 For the pre-processed strings, we compute the similarity of each string to entries in a predefined dictionary using the string distance measure. This results in one similarity score per dictionary entry, where we find the maximum similarity. If this maximum value exceeds a certain threshold, the input string is assigned the corresponding code automatically. This process allows us to filter out a significant portion of strings that do not require further processing.  
@@ -17,7 +17,7 @@ For input strings that could not be automatically classified using string matchi
 Our final models have multiple input streams: the first and second n-gram inputs, each followed by embeddings, positional encodings, and a transformer encoder; and the one-hot encoded inputs, followed by a dense layer, dropout, and ReLU activation layer. These three inputs are then merged into a single output layer, producing one probability per class. The final model architecture can be seen in @fig-architecture.
 ```{r, out.width='90%', fig.align='center', fig.cap='Model architecture',include=T,echo=F}
 #| label: fig-architecture
-knitr::include_graphics(file.path(here("chapters","images/model_architekur.png")))
+knitr::include_graphics(file.path(here("images","model_architekur.png")))
 ```
 
 We fine-tune the transformers’ hyper parameters to improve model accuracy. The average model has around 10 million parameters. Increasing the model size further tends to reduce performance, likely due to over-fitting on the relatively small training data. 
