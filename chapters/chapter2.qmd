@@ -6,7 +6,6 @@ knitr::opts_chunk$set(message=FALSE)
 Our model-based approach is divided into two main phases: Phase 1, string matching, and Phase 2, the neural network (NN)-based model. This approach is visualized in @fig-pipeline. As a first step in this pipeline, we perform pre-processing on the input strings. This includes transforming all characters to lowercase, removing stop words (e.g., “and,” “to,” “for”) and special characters (e.g., “-,” “%,” “&”), and converting any umlaut characters to non-umlauts (e.g., “ü” to “u”). Additionally, we remove gender-specific word endings, such as “-in” in German, to maintain consistency. 
 ```{r, out.width='90%', fig.align='center', fig.cap='Text classification pipeline',include=T,echo=F}
 #| label: fig-pipeline
-library(here)
 knitr::include_graphics(file.path("images","textclass_pipeline.png"))
 ```
 
@@ -17,7 +16,7 @@ For input strings that could not be automatically classified using string matchi
 Our final models have multiple input streams: the first and second n-gram inputs, each followed by embeddings, positional encodings, and a transformer encoder; and the one-hot encoded inputs, followed by a dense layer, dropout, and ReLU activation layer. These three inputs are then merged into a single output layer, producing one probability per class. The final model architecture can be seen in @fig-architecture.
 ```{r, out.width='90%', fig.align='center', fig.cap='Model architecture',include=T,echo=F}
 #| label: fig-architecture
-knitr::include_graphics(file.path(here("images","model_architekur.png")))
+knitr::include_graphics(file.path("images","model_architekur.png"))
 ```
 
 We fine-tune the transformers’ hyper parameters to improve model accuracy. The average model has around 10 million parameters. Increasing the model size further tends to reduce performance, likely due to over-fitting on the relatively small training data. 
