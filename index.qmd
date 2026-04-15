@@ -49,10 +49,8 @@ image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY-OenRMvFyZUfDm_s
 duration: "90"  # Duration in minutes
 
 skills:
-  - Git Basics
-  - Quarto Authoring
-  - Reproducible Research
-  - Using SSPCloud
+  - Neural Networks
+  - Language Models
 
 courseMaterial:
   - R Scripts
@@ -83,10 +81,6 @@ deploymentURL:
 
 suggestedRequirements:
   - "https://quarto.org/"
-  - "https://scikit-learn.org/stable/"
-
-# Optional: Statistical process classification
-gsbpm: "5.1" # See complete taxonomy: https://www.unescap.org/sites/default/d8files/event-documents/GSBPM_v5.1_R_for_SBP_8-18Apr2024.pdf
 ---
 
 
