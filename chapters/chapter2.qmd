@@ -1,5 +1,5 @@
 # Transformer Models
-```{r setup}
+```{r setup, echo=FALSE}
 knitr::opts_chunk$set(message=FALSE,echo = F)
 ```
 
