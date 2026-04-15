@@ -7,7 +7,7 @@ Our model-based approach is divided into two main phases: Phase 1, string matchi
 ```{r, out.width='90%', fig.align='center', fig.cap='Text classification pipeline',include=T,echo=F}
 #| label: fig-pipeline
 library(here)
-knitr::include_graphics(file.path(here("images","textclass_pipeline.png")))
+knitr::include_graphics(file.path("images","textclass_pipeline.png"))
 ```
 
 For the pre-processed strings, we compute the similarity of each string to entries in a predefined dictionary using the string distance measure. This results in one similarity score per dictionary entry, where we find the maximum similarity. If this maximum value exceeds a certain threshold, the input string is assigned the corresponding code automatically. This process allows us to filter out a significant portion of strings that do not require further processing.  
