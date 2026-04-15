@@ -39,7 +39,6 @@ format:
       - brand
     css: styles.css
     toc: true
-    embed-resources: true
 
 filters:
   - export-metadata.lua

@@ -35,12 +35,13 @@ isco <- data.table("Survey"=c("LFS","JVS","SES"),
                   "top-10 accuracy"=c(82,87,97))
 knitr::kable(isco, align = "c")
 ```
-
 In @fig-iscores shows the different models and their performance per survey. For all surveys we conclude that the combination of a transformer and an XGBoost model yields the best predictions. A simple Naive Bayes model continuously scores the lowest in top-10 accuracy.
 
 ```{r, out.width='90%', fig.align='center', fig.cap='Comparison of Models',include=T,echo=F}
 #| label: fig-iscores
 knitr::include_graphics(file.path("images","results_per_survey.png"))
 ```
+
+
 
 As an attempt to further improve our models' performances, we explored hierarchical models. The implementation of some of these models and the collection of their results was done during the course of Cluster 3 and can be found [here](https://aiml4os.github.io/WP10_Cluster3_HierarchicalClassificationModels/).
