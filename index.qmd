@@ -1,5 +1,5 @@
 ---
-title: "AIML4OS Cluser 4" # See below for multilingual resource
+title: "AIML4OS Cluster 2" # See below for multilingual resource
 subtitle: "Textclassification with Transformer Models - Austria's Use-Case"
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%">
