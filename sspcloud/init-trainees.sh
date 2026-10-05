@@ -9,7 +9,7 @@ echo /home/onyxia/work/$MY_REPO
 
 # Download data
 # This script is run with bash because there is a bash array
-bash $MY_REPO/sspcloud/download_data.sh
+# bash $MY_REPO/sspcloud/download_data.sh
 
 # Open project
 sh $MY_REPO/sspcloud/open_project.sh
