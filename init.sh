@@ -3,13 +3,7 @@
 export WORK_DIR=/home/onyxia/work
 
 # Get the name of the repo
-#export MY_REPO=$(ls -d "/home/onyxia/work"/*/ | head -n 1 | xargs basename)
-# Clone without token (public repo, no auth needed)
-git clone --depth 1 --branch main \
-  https://github.com/AIML4OS/WP10_Cluster2_TransformerClassification.git \
-  "$WORK_DIR/WP10_Cluster2_TransformerClassification"
-
-export MY_REPO="WP10_Cluster2_TransformerClassification"
+export MY_REPO=$(ls -d "/home/onyxia/work"/*/ | head -n 1 | xargs basename)
 
 echo /home/onyxia/work/$MY_REPO
 
